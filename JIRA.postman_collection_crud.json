@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "93ffaeec-3b3c-4116-928e-155467a609c8",
+		"name": "JIRA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11079011"
+	},
+	"item": [
+		{
+			"name": "Get Issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"projectid\",pm.response.json().id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURI}}/rest/api/latest/project/KAN",
+					"host": [
+						"{{baseURI}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"latest",
+						"project",
+						"KAN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.environment.set(\"issueid\",pm.response.json().id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"fields\": {\n\"project\": {\n\"id\": \"{{projectid}}\"\n},\n\"summary\": \"Sample Issue Raised\",\n\"issuetype\": {\n\"id\": \"10001\"\n}\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURI}}/rest/api/3/issue",
+					"host": [
+						"{{baseURI}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"issue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURI}}/rest/api/3/issue/{{issueid}}",
+					"host": [
+						"{{baseURI}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"issue",
+						"{{issueid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "selenium3bymukesh@gmail.com",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "ATATT3xFfGF0jqfM_cTP3jTnC8m8-w52HFxeq-RgycMGh-nGPyS-0BAdCJ12K11bzdsjghGoVjXqG4YjOdfDZOnK134CvF3P5CLbQWxay8rTJ7Lj_-0qih-7Cbspr-kHX_WkfFNSE-_JGky7ume0leBc0rXwAeJFCctnb2q0cAlErbWA-pAdkes=C1EED06F",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "c",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
